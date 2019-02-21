@@ -41,7 +41,7 @@ test_set_projections = t(svd$u %*% diag(svd$d)) %*% test_set
 distances = apply(test_set_projections, 2, function(test) {
   dist = apply(training_projections, 2, function(x) sqrt(sum((x - test) ^ 2)))
   data.frame(
-  	"test.file.name" = test_files[which(test == test_set_projections, arr.ind = TRUE)[1,2]],
+    "test.file.name" = test_files[which(test == test_set_projections, arr.ind = TRUE)[1,2]],
     "min.index" = which(dist == min(dist)),
     "min.dist" = min(dist),
     "min.file.name" = training_set_files[which(dist == min(dist))],
