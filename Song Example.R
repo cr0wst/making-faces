@@ -12,7 +12,7 @@ training_set = t(data.matrix(songs))
 centered = training_set - rowMeans(training_set)
 
 # Step 3 Perform SVD
-svd = svd(centered / sqrt(49))
+svd = svd(centered / sqrt(ncol(training_set)))
 
 # Step 4 Project the Training Set
 training_projections = svd$u %*% diag(svd$d) %*% centered

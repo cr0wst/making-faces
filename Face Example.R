@@ -16,7 +16,7 @@ average_face = rowMeans(training_set)
 centered = training_set - average_face
 
 # Step 3 Perform SVD
-svd = svd(centered / 5)
+svd = svd(centered / sqrt(ncol(training_set)))
 
 # Step 4 Project the Training Set Into Low-Rank Dimension
 training_projections = t(svd$u %*% diag(svd$d)) %*% centered
