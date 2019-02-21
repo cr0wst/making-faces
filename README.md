@@ -7,7 +7,7 @@ For training and test set images, I recommend the Yale Face Database: http://vis
 
 ## How to use with Yale Faces
 
-This repo does not contain the images used in the slides. I recommend the Yal Face Database.
+This repo does not contain the images used in the slides. I recommend the Yale Face Database.
 
 ### Clone the Repository
 
