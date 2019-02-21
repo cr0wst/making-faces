@@ -1,0 +1,5 @@
+/training_set/*
+/test_set/*
+
+!training_set/.gitkeep
+!test_set/.gitkeep
