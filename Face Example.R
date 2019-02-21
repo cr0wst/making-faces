@@ -1,10 +1,11 @@
+if (!require("imager")) install.packages("imager")
 library("imager")
 
 ########################
 ## Creating the Model ##
 ########################
 # Step 1 Create Training Set
-training_set_files = list.files(path = 'training_set', pattern = '.jpg', full.names = TRUE)
+training_set_files = list.files(path = 'training_set', pattern = 'jpg|gif|png', full.names = TRUE)
 training_set_faces = map_il(training_set_files, load.image)
 training_set = matrix(
   unlist(lapply(training_set_faces, function(x) x[, , , 1])),
@@ -25,7 +26,7 @@ training_projections = t(svd$u %*% diag(svd$d)) %*% centered
 ## Testing the Model ##
 #######################
 # Step 1 Create Test Set
-test_files = list.files(path = 'test_set', pattern = '.jpg', full.names = TRUE)
+test_files = list.files(path = 'test_set', pattern = 'jpg|gif|png', full.names = TRUE)
 test_faces = map_il(test_files, load.image)
 test_set = matrix(
   unlist(lapply(test_faces, function(x) x[, , , 1] - average_face)),
@@ -40,10 +41,13 @@ test_set_projections = t(svd$u %*% diag(svd$d)) %*% test_set
 distances = apply(test_set_projections, 2, function(test) {
   dist = apply(training_projections, 2, function(x) sqrt(sum((x - test) ^ 2)))
   data.frame(
+  	"test.file.name" = test_files[which(test == test_set_projections, arr.ind = TRUE)[1,2]],
     "min.index" = which(dist == min(dist)),
     "min.dist" = min(dist),
+    "min.file.name" = training_set_files[which(dist == min(dist))],
     "max.index" = which(dist == max(dist)),
-    "max.dist" = max(dist)
+    "max.dist" = max(dist),
+    "max.file.name" = training_set_files[which(dist == max(dist))]
   )
 })
 
