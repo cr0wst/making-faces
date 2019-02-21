@@ -1,6 +1,3 @@
-library("plot3D")
-library("plotrix")
-
 ########################
 ## Creating the Model ##
 ########################
